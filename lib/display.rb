@@ -2,6 +2,7 @@
 #PURPOSE: The main UI for the program
 ########################################################################################################
 require "active_support"
+require "readline"
 class Display
   def welcome
     self.show_trending
@@ -25,8 +26,8 @@ class Display
       puts "#{n}. #{subreddit}"
       n += 1
     end
-    puts "Enter the subreddit you'd like to explore or 'exit' to quit:"
-    input = gets.chomp
+    input = Readline.readline("Enter the subreddit number you'd like to explore or 'exit' to quit:\n")
+    input = input.strip
     puts "-------------------------------"
     if input.to_i < 1 || input.to_i > n
       if input.downcase == "exit"
