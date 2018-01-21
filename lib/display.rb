@@ -1,6 +1,7 @@
 ########################################################################################################
 #PURPOSE: The main UI for the program
 ########################################################################################################
+require "active_support"
 class Display
   def welcome
     self.show_trending
@@ -13,7 +14,7 @@ class Display
     ########################################################################################################
     system "clear"
     #convert the current date to a more read-friendly format
-    date = Time.now.strftime("%B %d %C%y")
+    date = Time.now.strftime("%A, %B %d#{ActiveSupport::Inflector.ordinal(Time.now.day)} %C%y")
 
     scrap = Scraper.new
     trending_list = scrap.simple_data[:subreddits]
