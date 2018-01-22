@@ -23,10 +23,10 @@ class Display
     puts "Trending Subreddits for #{date}"
     puts "-------------------------------"
     trending_list.each do | subreddit |
-      puts "#{n}. #{subreddit}"
+      puts "#{n}..............................#{subreddit}"
       n += 1
     end
-    input = Readline.readline("Enter the subreddit number you'd like to explore or 'exit' to quit:\n")
+    input = Readline.readline("Enter the subreddit number you'd like to explore or type 'exit' to quit:\n")
     input = input.strip
     puts "-------------------------------"
     if input.to_i < 1 || input.to_i > n
@@ -51,20 +51,35 @@ class Display
     ########################################################################################################
     Scraper.scrape_subreddit(subreddit)
     thread = Reddit_Thread.find_by_name(subreddit)
+    front_page_threads = thread.front_page_threads
+    current_topic = 0
+    max_topics = front_page_threads.size
+    per_page = 4
     puts "***************************"
     puts "LOADING SUBREDDIT DETAILS"
     puts "***************************"
     puts "#{subreddit}"
-    puts "-------------------------------"
+    puts "-------------------------------\n"
     puts "Users Online: #{thread.current_users}/#{thread.subscribers}"
-    puts "Frontpage Threads"
-    thread.front_page_threads.each do | topic |
-     puts "Thread: #{topic[:title]}"
-     puts "Link: https://www.reddit.com#{topic[:link]}\n\n"
+    puts "Frontpage Threads\n"
+    while current_topic < max_topics
+      system "clear"
+      puts "Viewing Frontpage Threads #{current_topic + 1} - #{current_topic + per_page}"
+      puts "----------------------------"
+      page_threads = front_page_threads.slice(current_topic, per_page)
+      page_threads.each do | topic |
+        puts "Thread: #{topic[:title]}"
+        puts "Link: https://www.reddit.com#{topic[:link]}\n\n"
+        current_topic += 1
+      end
+      puts "----------------------------"
+      puts "Press [ Enter ] to view the next page or type 'exit' to return to the main menu..."
+      input = Readline.readline()
+      input = input.strip
+      if input.downcase == "exit"
+        break
+      end
     end
-     puts "----------------------------"
-     puts "Press [ Enter ] to Continue..."
-     gets.chomp
      self.show_trending
   end
 
