@@ -16,6 +16,22 @@ class Reddit_Thread
     @@all << self;
   end
 
+
+  def getTopicsByKarma
+    #returns threads by greatest to least karma value
+
+  sorted =   @front_page_threads.sort do |a, b|
+      if a[:karma] < b[:karma]
+        1
+      elsif a[:karma] > b[:karma]
+        -1
+      else
+       a[:karma] <=> b[:karma]
+      end
+  end
+  sorted
+end
+
   def self.find_by_name(subreddit_name)
     @@all.detect do | thread |
       thread.subreddit == subreddit_name
@@ -25,6 +41,7 @@ class Reddit_Thread
   def self.all
     @@all
   end
+
 
 
   def self.create(data)

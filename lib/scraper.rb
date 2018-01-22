@@ -29,6 +29,7 @@ class Scraper
     date = title.split(": ")[0].split(" ").pop
     subreddits = title.split(": ")[1].split(", ")
     @simple_data[:subreddits] = subreddits
+
   end
 
   def self.scrape_subreddit(subreddit_name)
@@ -44,10 +45,13 @@ class Scraper
     data[:subreddit] = subreddit_name
     data[:current_users] = amt_online
     data[:subscribers] = subscribers
+    index = 0;
     data[:front_page_threads] = quick_data.collect do | code |
       thread = { }
       thread[:title] = code.css("a.title").text
       thread[:link] = code["data-permalink"]
+      thread[:karma] = code.css(".midcol.unvoted").css(".score")[0].text.to_i
+      index += 1
       thread
     end
     Reddit_Thread.create(data)

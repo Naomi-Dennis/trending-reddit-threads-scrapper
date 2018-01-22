@@ -51,7 +51,7 @@ class Display
     ########################################################################################################
     Scraper.scrape_subreddit(subreddit)
     thread = Reddit_Thread.find_by_name(subreddit)
-    front_page_threads = thread.front_page_threads
+    front_page_threads = thread.getTopicsByKarma
     current_topic = 0
     max_topics = front_page_threads.size
     per_page = 4
@@ -64,12 +64,13 @@ class Display
     puts "Frontpage Threads\n"
     while current_topic < max_topics
       system "clear"
-      puts "Viewing Frontpage Threads #{current_topic + 1} - #{current_topic + per_page}"
+      puts "Viewing Frontpage Threads #{current_topic + 1} - #{current_topic + per_page} of #{subreddit}. Subscribers Online -- #{thread.current_users}/#{thread.subscribers}"
       puts "----------------------------"
       page_threads = front_page_threads.slice(current_topic, per_page)
       page_threads.each do | topic |
         puts "Thread: #{topic[:title]}"
-        puts "Link: https://www.reddit.com#{topic[:link]}\n\n"
+        puts "Link: https://www.reddit.com#{topic[:link]}"
+        puts "Upvotes: #{topic[:karma]}\n\n"
         current_topic += 1
       end
       puts "----------------------------"
