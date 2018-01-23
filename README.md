@@ -3,6 +3,7 @@
 With this gem, you are able to view the trending subreddits of the day. Links are provided to view the subreddit in a browser.
 
 ## Usage
+**Run 'bundle install' before doing anything else!!**
 
 run
 
