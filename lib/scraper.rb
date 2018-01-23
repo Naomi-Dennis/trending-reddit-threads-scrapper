@@ -41,8 +41,8 @@ class Scraper
     description = fresh_data.css(".md").text.to_s
 
     data = {}
-    data[:subreddit] = subreddit_name
-    data[:current_users] = amt_online
+    data[:name] = subreddit_name
+    data[:users_online] = amt_online
     data[:subscribers] = subscribers
     index = 0;
     data[:front_page_threads] = quick_data.collect do | code |
@@ -54,7 +54,7 @@ class Scraper
       index += 1
       thread
     end
-    Reddit_Thread.create(data)
+    Subreddit.create(data)
   end
 
 end

@@ -52,7 +52,7 @@ class Display
     #it and pasting it in a browser.
     ########################################################################################################
     Scraper.scrape_subreddit(subreddit)
-    thread = Reddit_Thread.find_by_name(subreddit)
+    thread = Subreddit.find_by_name(subreddit)
     front_page_threads = thread.getTopicsByKarma
     current_topic = 0
     max_topics = front_page_threads.size
@@ -62,11 +62,11 @@ class Display
     puts "***************************"
     puts "#{subreddit}"
       puts "*****************************************\n"
-    puts "Users Online: #{thread.current_users}/#{thread.subscribers}"
+    puts "Users Online: #{thread.users_online}/#{thread.subscribers}"
     puts "Frontpage Threads\n"
     while current_topic < max_topics
       system "clear"
-      puts "Viewing Frontpage Threads #{current_topic + 1} - #{current_topic + per_page} of #{subreddit}. Subscribers Online -- #{thread.current_users}/#{thread.subscribers}".light_yellow
+      puts "Viewing Frontpage Threads #{current_topic + 1} - #{current_topic + per_page} of #{subreddit}. Subscribers Online -- #{thread.users_online}/#{thread.subscribers}".light_yellow
       puts "*****************************************"
       page_threads = front_page_threads.slice(current_topic, per_page)
       page_threads.each do | topic |
