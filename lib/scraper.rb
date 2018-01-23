@@ -29,7 +29,6 @@ class Scraper
     date = title.split(": ")[0].split(" ").pop
     subreddits = title.split(": ")[1].split(", ")
     @simple_data[:subreddits] = subreddits
-
   end
 
   def self.scrape_subreddit(subreddit_name)
@@ -51,6 +50,7 @@ class Scraper
       thread[:title] = code.css("a.title").text
       thread[:link] = code["data-permalink"]
       thread[:karma] = code.css(".midcol.unvoted").css(".score")[0].text.to_i
+      thread[:comments] = code.css(".first")[0].text.split(" ")[0].to_i
       index += 1
       thread
     end

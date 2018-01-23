@@ -70,7 +70,8 @@ class Display
       page_threads.each do | topic |
         puts "Thread: #{topic[:title]}"
         puts "Link: https://www.reddit.com#{topic[:link]}"
-        puts "Upvotes: #{topic[:karma]}\n\n"
+        puts "Upvotes: #{topic[:karma]}"
+        puts "Comments: #{topic[:comments]}\n\n"
         current_topic += 1
       end
       puts "----------------------------"
