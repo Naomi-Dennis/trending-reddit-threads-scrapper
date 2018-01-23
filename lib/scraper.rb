@@ -10,7 +10,7 @@ require 'pry'
 require 'open-uri'
 require 'nokogiri'
 require "net/http"
-
+require "colorize"
 class Scraper
   attr_accessor :file, :parsed_file, :simple_data
 

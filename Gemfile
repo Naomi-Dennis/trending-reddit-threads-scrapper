@@ -11,3 +11,4 @@ gem "open_uri_redirections"
 gem "require_all"
 gem "rspec"
 gem "activesupport"
+gem "colorize" ## colorize console

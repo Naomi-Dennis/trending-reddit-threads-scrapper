@@ -4,6 +4,7 @@
 #
 # Despite being called Reddit_Thread, it actually shows the attributes of a subreddit, not a thread.
 ########################################################################################################
+require "colorize"
 class Reddit_Thread
   attr_accessor :subreddit, :current_users, :subscribers, :front_page_threads
 

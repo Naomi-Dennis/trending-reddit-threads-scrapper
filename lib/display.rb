@@ -3,6 +3,7 @@
 ########################################################################################################
 require "active_support"
 require "readline"
+require "colorize"
 class Display
   def welcome
     self.show_trending
@@ -20,15 +21,16 @@ class Display
     scrap = Scraper.new
     trending_list = scrap.simple_data[:subreddits]
     n = 1;
-    puts "Trending Subreddits for #{date}"
-    puts "-------------------------------"
+    puts "Trending Subreddits for #{date}".light_green
+      puts "**************************************************"
     trending_list.each do | subreddit |
-      puts "#{n}..............................#{subreddit}"
+      puts "#{n}".light_white + "..............................".white + "#{subreddit}".light_white
       n += 1
     end
-    input = Readline.readline("Enter the subreddit number you'd like to explore or type 'exit' to quit:\n")
+    puts "****************************************************"
+    input = Readline.readline("Enter the subreddit number you'd like to explore or type 'exit' to quit: ".light_cyan)
     input = input.strip
-    puts "-------------------------------"
+
     if input.to_i < 1 || input.to_i > n
       if input.downcase == "exit"
         puts "Good-bye!"
@@ -59,23 +61,23 @@ class Display
     puts "LOADING SUBREDDIT DETAILS"
     puts "***************************"
     puts "#{subreddit}"
-    puts "-------------------------------\n"
+      puts "*****************************************\n"
     puts "Users Online: #{thread.current_users}/#{thread.subscribers}"
     puts "Frontpage Threads\n"
     while current_topic < max_topics
       system "clear"
-      puts "Viewing Frontpage Threads #{current_topic + 1} - #{current_topic + per_page} of #{subreddit}. Subscribers Online -- #{thread.current_users}/#{thread.subscribers}"
-      puts "----------------------------"
+      puts "Viewing Frontpage Threads #{current_topic + 1} - #{current_topic + per_page} of #{subreddit}. Subscribers Online -- #{thread.current_users}/#{thread.subscribers}".light_yellow
+      puts "*****************************************"
       page_threads = front_page_threads.slice(current_topic, per_page)
       page_threads.each do | topic |
-        puts "Thread: #{topic[:title]}"
-        puts "Link: https://www.reddit.com#{topic[:link]}"
-        puts "Upvotes: #{topic[:karma]}"
-        puts "Comments: #{topic[:comments]}\n\n"
+        puts "Thread: #{topic[:title]}".light_white
+        puts "Link: https://www.reddit.com#{topic[:link]}".white
+        puts "Upvotes: #{topic[:karma]}".cyan
+        puts "Comments: #{topic[:comments]}\n".light_yellow
         current_topic += 1
       end
-      puts "----------------------------"
-      puts "Press [ Enter ] to view the next page or type 'exit' to return to the main menu..."
+      puts "*****************************************"
+      puts "Press [ Enter ] to view the next page or type 'exit' to return to the main menu...".light_cyan
       input = Readline.readline()
       input = input.strip
       if input.downcase == "exit"
