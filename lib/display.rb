@@ -18,7 +18,7 @@ class Display
     #convert the current date to a more read-friendly format
     date = Time.now.strftime("%A, %B %d#{ActiveSupport::Inflector.ordinal(Time.now.day)} %C%y")
 
-    scrap = Scraper.new
+    scrap = Trending_Subreddit_Scraper.new
     trending_list = scrap.simple_data[:subreddits]
     n = 1;
     puts "Trending Subreddits for #{date}".light_green

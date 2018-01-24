@@ -14,26 +14,9 @@ require "colorize"
 class Scraper
   attr_accessor :file, :parsed_file, :simple_data
 
-  def initialize
-    @simple_data = Array.new;
-    @file = open('https://www.reddit.com/r/trendingsubreddits/', 'User-Agent' => 'Nooby')
-    @parsed_file = Nokogiri::HTML.parse(@file)
-    @thread_data = @parsed_file.css('.thing')
-    parse_trending_subreddits_data();
-  end
-
-  def parse_trending_subreddits_data
-    today_data = @thread_data[0]
-    @simple_data = { }
-    title = today_data.css("a.title")[0].text
-    date = title.split(": ")[0].split(" ").pop
-    subreddits = title.split(": ")[1].split(", ")
-    @simple_data[:subreddits] = subreddits
-  end
-
   def self.scrape_subreddit(subreddit_name)
     link = "https://www.reddit.com" + subreddit_name
-    fresh_data = Nokogiri::HTML.parse( open(link, 'User-Agent' => 'Nooby') )
+    fresh_data = Nokogiri::HTML.parse( open(link, 'User-Agent' => 'tren_sub_cli_project_agent') )
     quick_data = fresh_data.css(".thing")
 
     subscribers = fresh_data.css(".subscribers").css(".number").text
