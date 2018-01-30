@@ -1,9 +1,9 @@
 ########################################################################################################
 #PURPOSE: The main UI for the program
 ########################################################################################################
-require "active_support"
-require "readline"
-require "colorize"
+# require "active_support"
+# require "readline"
+# require "colorize"
 class Display
   def welcome
     self.show_trending
@@ -17,28 +17,27 @@ class Display
     system "clear"
     #convert the current date to a more read-friendly format
     date = Time.now.strftime("%A, %B %d#{ActiveSupport::Inflector.ordinal(Time.now.day)} %C%y")
-
     scrap = Trending_Subreddit_Scraper.new
     trending_list = scrap.simple_data[:subreddits]
     n = 1;
     puts "Trending Subreddits for #{date}".light_green
-      puts "**************************************************"
+    puts "**************************************************"
     trending_list.each do | subreddit |
       puts "#{n}".light_white + "..............................".white + "#{subreddit}".light_white
       n += 1
     end
     puts "****************************************************"
-    input = Readline.readline("Enter the subreddit number you'd like to explore or type 'exit' to quit: ".light_cyan)
+    input = Readline.readline("Enter the subreddit number you'd like to explore or type 'exit' to quit\n: ".light_cyan)
     input = input.strip
 
     if input.to_i < 1 || input.to_i > n
       if input.downcase == "exit"
         puts "Good-bye!"
       else
-          self.show_trending
+        show_trending
       end
     else
-        self.view_subreddit(trending_list[input.to_i - 1])
+      view_subreddit(trending_list[input.to_i - 1])
     end
   end
 

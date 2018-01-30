@@ -1,6 +1,6 @@
 # Trendingsubreddits
 
-With this gem, you are able to view the trending subreddits of the day. Links are provided to view the subreddit in a browser.
+With this project, you are able to view the trending subreddits of the day. Links are provided to view the subreddit in a browser.
 
 ## Usage
 **Run 'bundle install' before doing anything else!!**
@@ -24,4 +24,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Naomi-
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The project is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

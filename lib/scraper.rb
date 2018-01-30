@@ -1,16 +1,16 @@
 ########################################################################################################
-#PURPOSE: To scrape teh appropriate reddit webpages for the needed data.
+#PURPOSE: To scrape the appropriate reddit webpages for the needed data.
 #Is able to scrape the front page of any reddit webpage by just giving the subreddit name.
 #The only exception nis the trendingsubreddits call, made in #initialize, as it is the root page for
 #this program.
 #
 # Theh user agent is changed on each call to ensure the site doesn't get overwhelmed with numerous direct calls to its server.
 ########################################################################################################
-require 'pry'
-require 'open-uri'
-require 'nokogiri'
-require "net/http"
-require "colorize"
+# require 'pry'
+# require 'open-uri'
+# require 'nokogiri'
+# require "net/http"
+# require "colorize"
 class Scraper
   attr_accessor :file, :parsed_file, :simple_data
 
